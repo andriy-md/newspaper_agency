@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% for newspaper in newspaper_list %}
+    <h3>{{ newspaper.title }}</h3>
+    <p>{{ newspaper.topic }}</p>
+    <p>{{ newspaper.content }}</p>
+    <hr>
+    <br>
+  {% empty %}
+    <p>Currently there are no newspapers</p>
+  {% endfor %}
+{% endblock %}
