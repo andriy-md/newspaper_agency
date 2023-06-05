@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ newspaper.title }}</h1>
+  <h3>{{ newspaper.topic }}</h3>
+  <p>
+    Published by:
+    {% for publisher in newspaper.publishers.all %}
+      {{ publisher.username }} ({{ publisher.first_name }} {{ publisher.last_name }}){% if not forloop.last %}, {% endif %}
+    {% endfor %}
+  </p>
+  <p>{{ newspaper.content }}</p>
+  <p>Dated: {{ newspaper.published_date }}</p>
+{% endblock %}
