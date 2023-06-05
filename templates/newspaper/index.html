@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>You can find here</h1>
+  <li class="list-group">
+    <ul class="list-group-item">{{ newspapers.count }} newspaper{{ newspapers|pluralize }}</ul>
+    <ul class="list-group-item">{{ redactors.count }} redactor{{ redactors.count|pluralize }}</ul>
+    <ul class="list-group-item">{{ topics.count }} topic {{ topics.count|pluralize }}</ul>
+  </li>
+{% endblock %}
