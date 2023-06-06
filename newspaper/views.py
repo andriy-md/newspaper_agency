@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -41,6 +42,11 @@ class NewspaperUpdateView(generic.UpdateView):
         return reverse("newspaper:newspaper-detail", kwargs={"pk": self.object.pk})
 
 
+class NewspaperDeleteView(generic.DeleteView):
+    model = Newspaper
+    success_url = reverse_lazy("newspaper:newspaper-list")
+
+
 class RedactorListView(generic.ListView):
     model = get_user_model()
 
@@ -55,3 +61,8 @@ class RedactorCreateView(generic.CreateView):
 
     def get_success_url(self):
         return reverse("newspaper:redactor-detail", kwargs={"pk": self.object.pk})
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = get_user_model()
+    success_url = reverse_lazy("")
