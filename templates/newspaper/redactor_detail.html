@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Information on {{ redactor.username }}</h1>
+  <p><strong>First name:</strong> {{ redactor.first_name }}</p>
+  <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
+  <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
+  <p><strong>Is staff:</strong> {{ redactor.is_staff }}</p>
+
+  <h2>Newspapers:</h2>
+  {% for newspaper in redactor.newspapers.all %}
+    <li class="list-group-item list-group-item-action">
+      <ul>{{ newspaper.title }} ({{ newspaper.topic }})</ul>
+    </li>
+  {% empty %}
+    <p>No newspapers</p>
+  {% endfor %}
+{% endblock %}

@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -43,4 +42,8 @@ class NewspaperUpdateView(generic.UpdateView):
 
 
 class RedactorListView(generic.ListView):
+    model = get_user_model()
+
+
+class RedactorDetailView(generic.DetailView):
     model = get_user_model()
