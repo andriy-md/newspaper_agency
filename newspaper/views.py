@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from newspaper.forms import NewspaperForm
+from newspaper.forms import NewspaperForm, RedactorCreationForm
 from newspaper.models import Newspaper, Topic
 
 
@@ -47,3 +47,11 @@ class RedactorListView(generic.ListView):
 
 class RedactorDetailView(generic.DetailView):
     model = get_user_model()
+
+
+class RedactorCreateView(generic.CreateView):
+    model = get_user_model()
+    form_class = RedactorCreationForm
+
+    def get_success_url(self):
+        return reverse("newspaper:redactor-detail", kwargs={"pk": self.object.pk})

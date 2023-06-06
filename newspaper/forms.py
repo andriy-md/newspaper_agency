@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 
-from newspaper.models import Topic, Newspaper
+from newspaper.models import Newspaper, Redactor
 
 
 class NewspaperForm(forms.ModelForm):
@@ -18,3 +19,10 @@ class NewspaperForm(forms.ModelForm):
             "title": forms.TextInput(attrs={"placeholder": "Enter Newspaper's title"}),
             "content": forms.Textarea(attrs={"placeholder": "Enter text"})
         }
+
+
+class RedactorCreationForm(UserCreationForm):
+
+    class Meta(UserCreationForm.Meta):
+        model = Redactor
+        fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "years_of_experience",)
