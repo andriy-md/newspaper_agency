@@ -14,7 +14,7 @@
     {% for redactor in redactor_list %}
       <tr>
         <td>{{ redactor.id }}</td>
-        <td>{{ redactor.username }}</td>
+        <td><a href="{% url 'newspaper:redactor-detail' pk=redactor.id %}">{{ redactor.username }}</a></td>
         <td>{{ redactor.first_name }}</td>
         <td>{{ redactor.last_name }}</td>
         <td>{{ redactor.years_of_experience }}</td>
@@ -24,5 +24,8 @@
   {% else %}
     <p>There are no redactors</p>
   {% endif %}
-
+  <br>
+  <a href="{% url 'newspaper:redactor-create' %}" class="btn btn-primary">
+    Create new Redactor
+  </a>
 {% endblock %}

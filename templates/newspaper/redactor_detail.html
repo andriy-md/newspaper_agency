@@ -15,4 +15,8 @@
   {% empty %}
     <p>No newspapers</p>
   {% endfor %}
+  <br><br>
+<a href="{% url 'newspaper:redactor-delete' pk=redactor.id %}">
+  <button class="btn btn-danger">Delete Redactor</button>
+</a>
 {% endblock %}

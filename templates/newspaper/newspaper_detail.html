@@ -2,6 +2,9 @@
 
 {% block content %}
   <h1>{{ newspaper.title }}</h1>
+  <a href="{% url 'newspaper:newspaper-update' pk=newspaper.id %}" class="btn btn-primary link-to-page">
+    Update Newspaper
+  </a>
   <h3>{{ newspaper.topic }}</h3>
   <p>
     Published by:
@@ -11,4 +14,8 @@
   </p>
   <p>{{ newspaper.content }}</p>
   <p>Dated: {{ newspaper.published_date }}</p>
+  <br><br>
+  <a href="{% url 'newspaper:newspaper-delete' pk=newspaper.id %}">
+    <button class="btn btn-danger">Delete Newspaper</button>
+  </a>
 {% endblock %}
