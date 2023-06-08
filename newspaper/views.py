@@ -20,6 +20,7 @@ def index(request):
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
+    paginate_by = 5
 
 
 class NewspaperDetailView(generic.DetailView):
@@ -49,6 +50,7 @@ class NewspaperDeleteView(generic.DeleteView):
 
 class RedactorListView(generic.ListView):
     model = get_user_model()
+    paginate_by = 10
 
 
 class RedactorDetailView(generic.DetailView):
