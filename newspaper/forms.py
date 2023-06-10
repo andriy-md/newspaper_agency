@@ -21,6 +21,10 @@ class NewspaperForm(forms.ModelForm):
         }
 
 
+class NewspaperSearchForm(forms.Form):
+    search_title = forms.CharField(max_length=255, required=False)
+
+
 class RedactorCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
