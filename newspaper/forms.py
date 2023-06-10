@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.core.validators import MinValueValidator
 
 from newspaper.models import Newspaper, Redactor
 
@@ -30,6 +31,10 @@ class NewspaperSearchForm(forms.Form):
 
 
 class RedactorCreationForm(UserCreationForm):
+    years_of_experience = forms.IntegerField(
+        widget=forms.NumberInput,
+        validators=[MinValueValidator(0)]
+    )
 
     class Meta(UserCreationForm.Meta):
         model = Redactor
