@@ -22,7 +22,11 @@ class NewspaperForm(forms.ModelForm):
 
 
 class NewspaperSearchForm(forms.Form):
-    search_title = forms.CharField(max_length=255, required=False)
+    search_title = forms.CharField(
+        max_length=255,
+        required=False,
+        widget=forms.TextInput(attrs={"placeholder": "Enter title"})
+    )
 
 
 class RedactorCreationForm(UserCreationForm):
