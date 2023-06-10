@@ -23,10 +23,12 @@ class NewspaperListView(generic.ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        queryset = Newspaper.objects.all()
-        if self.request.GET.get("search_title", False):
-            title_search = self.request.GET.get("search_title")
-            queryset = Newspaper.objects.filter(title__icontains=title_search)
+        queryset = Newspaper.objects.all().prefetch_related("publishers")
+
+        title_search = self.request.GET.get("search_title")
+        if title_search:
+            queryset = queryset.filter(title__icontains=title_search)
+
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
