@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_background.html" %}
 
 {% block content %}
   <h1>Newspaper list:</h1>
@@ -13,9 +13,11 @@
   </a>
   {% for newspaper in newspaper_list %}
     <h3>{{ newspaper.title }}</h3>
-    <p><a href="{% url 'newspaper:newspaper-detail' pk=newspaper.id %}">{{ newspaper.id }}</a></p>
     <p>{{ newspaper.topic }}</p>
-    <p>{{ newspaper.content }}</p>
+    <p>
+      {{ newspaper.content|truncatewords:100 }}
+      <span><a href="{% url 'newspaper:newspaper-detail' pk=newspaper.id %}">Click here to read further</a></span>
+    </p>
     <hr>
     <br>
   {% empty %}
