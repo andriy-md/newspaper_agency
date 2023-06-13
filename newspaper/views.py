@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from newspaper.forms import NewspaperForm, NewspaperSearchForm, RedactorCreationForm
+from newspaper.forms import NewspaperForm, NewspaperSearchForm, RedactorForm
 from newspaper.models import Newspaper, Topic
 
 
@@ -20,7 +20,7 @@ def index(request):
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
-    paginate_by = 5
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = Newspaper.objects.all().prefetch_related("publishers")
@@ -73,7 +73,15 @@ class RedactorDetailView(generic.DetailView):
 
 class RedactorCreateView(generic.CreateView):
     model = get_user_model()
-    form_class = RedactorCreationForm
+    form_class = RedactorForm
+
+    def get_success_url(self):
+        return reverse("newspaper:redactor-detail", kwargs={"pk": self.object.pk})
+
+
+class RedactorUpdateView(generic.UpdateView):
+    model = get_user_model()
+    form_class = RedactorForm
 
     def get_success_url(self):
         return reverse("newspaper:redactor-detail", kwargs={"pk": self.object.pk})

@@ -30,7 +30,7 @@ class NewspaperSearchForm(forms.Form):
     )
 
 
-class RedactorCreationForm(UserCreationForm):
+class RedactorForm(UserCreationForm):
     years_of_experience = forms.IntegerField(
         widget=forms.NumberInput,
         validators=[MinValueValidator(0)]
