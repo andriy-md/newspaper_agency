@@ -41,7 +41,7 @@ class NewspaperDetailView(generic.DetailView):
     model = Newspaper
 
 
-class NewspaperCreateView(generic.CreateView):
+class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
     model = Newspaper
     form_class = NewspaperForm
 
@@ -49,7 +49,7 @@ class NewspaperCreateView(generic.CreateView):
         return reverse("newspaper:newspaper-detail", kwargs={"pk": self.object.pk})
 
 
-class NewspaperUpdateView(generic.UpdateView):
+class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Newspaper
     form_class = NewspaperForm
 
@@ -57,7 +57,7 @@ class NewspaperUpdateView(generic.UpdateView):
         return reverse("newspaper:newspaper-detail", kwargs={"pk": self.object.pk})
 
 
-class NewspaperDeleteView(generic.DeleteView):
+class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Newspaper
     success_url = reverse_lazy("newspaper:newspaper-list")
 
@@ -71,7 +71,7 @@ class RedactorDetailView(generic.DetailView):
     model = get_user_model()
 
 
-class RedactorCreateView(generic.CreateView):
+class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
     model = get_user_model()
     form_class = RedactorForm
 
@@ -79,7 +79,7 @@ class RedactorCreateView(generic.CreateView):
         return reverse("newspaper:redactor-detail", kwargs={"pk": self.object.pk})
 
 
-class RedactorUpdateView(generic.UpdateView):
+class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = get_user_model()
     form_class = RedactorForm
 
