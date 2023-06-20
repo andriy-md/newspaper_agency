@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.validators import MinValueValidator
 
 from newspaper.models import Newspaper, Redactor
@@ -26,7 +26,14 @@ class NewspaperSearchForm(forms.Form):
     search_title = forms.CharField(
         max_length=255,
         required=False,
-        widget=forms.TextInput(attrs={"placeholder": "Enter title"})
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by title",
+                "class": "form-control",
+                # "help_text": "",
+            }
+        )
     )
 
 
@@ -39,3 +46,11 @@ class RedactorForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Redactor
         fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "years_of_experience",)
+
+
+class RedactorUpdateDataForm(UserChangeForm):
+    password = None
+
+    class Meta(UserChangeForm.Meta):
+        model = Redactor
+        fields = ("first_name", "last_name", "years_of_experience",)

@@ -1,22 +1,54 @@
-{% extends "base.html" %}
+{% extends "base_background.html" %}
+{% load static %}
 
 {% block content %}
-  <h1>Information on {{ redactor.username }}</h1>
-  <p><strong>First name:</strong> {{ redactor.first_name }}</p>
-  <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
-  <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
-  <p><strong>Is staff:</strong> {{ redactor.is_staff }}</p>
+  <header class="header-2">
+    <div class="page-header min-vh-50 relative" style="background-image: url('{% static 'assets/img/bg10.jpg' %}')">
+      <span class="mask bg-gradient-primary opacity-4"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">Detail Profile of {{ redactor.username }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <h2>Newspapers:</h2>
-  {% for newspaper in redactor.newspapers.all %}
-    <li class="list-group-item list-group-item-action">
-      <ul>{{ newspaper.title }} ({{ newspaper.topic }})</ul>
-    </li>
-  {% empty %}
-    <p>No newspapers</p>
-  {% endfor %}
-  <br><br>
-<a href="{% url 'newspaper:redactor-delete' pk=redactor.id %}">
-  <button class="btn btn-danger">Delete Redactor</button>
-</a>
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 my-auto">
+          <h3 class="mb-5">{{ redactor.username }}</h3>
+          <table class="col-4">
+            <tr>
+              <th>First Name:</th>
+              <td>{{ redactor.first_name }}</td>
+            </tr>
+            <tr>
+              <th>Last Name:</th>
+              <td>{{ redactor.last_name }}</td>
+            </tr>
+            <tr>
+              <th>Years of experience:</th>
+              <td>{{ redactor.years_of_experience }}</td>
+            </tr>
+            <tr>
+              <th>Is staff:</th>
+              <td>{{ redactor.is_staff }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <a href="{% url 'newspaper:redactor-update' pk=redactor.id %}">
+          <button type="button" class="btn bg-gradient-info w-auto me-2">Update Profile</button>
+        </a>
+        <a href="{% url 'newspaper:redactor-delete' pk=redactor.id %}">
+          <button type="button" class="btn bg-gradient-danger w-auto me-2">Delete User</button>
+        </a>
+      </div>
+    </div>
+  </section>
 {% endblock %}

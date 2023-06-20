@@ -1,26 +1,58 @@
 {% extends "base_background.html" %}
+{% load static %}
 
 {% block content %}
-  <h1>Newspaper list:</h1>
-  {% load crispy_forms_filters %}
-  <form action="" method="get">
-    {{ search_form|crispy }}
-    <input type="submit" value="Search" class="btn btn-primary">
-  </form>
-  <br>
-  <a href="{% url 'newspaper:newspaper-create' %}" class="btn btn-primary link-to-page">
-    Create new Newspaper
-  </a>
-  {% for newspaper in newspaper_list %}
-    <h3>{{ newspaper.title }}</h3>
-    <p>{{ newspaper.topic }}</p>
-    <p>
-      {{ newspaper.content|truncatewords:100 }}
-      <span><a href="{% url 'newspaper:newspaper-detail' pk=newspaper.id %}">Click here to read further</a></span>
-    </p>
-    <hr>
-    <br>
-  {% empty %}
-    <p>Currently there are no newspapers</p>
-  {% endfor %}
+<header class="header-2">
+  <div class="page-header min-vh-50 relative" style="background-image: url('{% static 'assets/img/bg10.jpg' %}')">
+    <span class="mask bg-gradient-primary opacity-4"></span>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 text-center mx-auto">
+          <h1 class="text-white pt-3 mt-n5">Newspaper list</h1>
+          <a href="{% url 'newspaper:newspaper-create' %}">
+            <button class="btn bg-gradient-light w-auto me-2">Add Newspaper</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="py-1">
+  <div class="container">
+    <div class="row justify-space-between py-1">
+      <div class="col-lg-4">
+        <div class="input-group input-group-dynamic mb-4">
+          <form action="" method="get" class="input-group">
+            <span class="input-group-text">
+              <i class="fas fa-search" aria-hidden="true"></i>
+            </span>
+            {{ search_form }}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% for newspaper in newspaper_list %}
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 my-auto">
+          <h3>{{ newspaper.title }}</h3>
+          <p class="pe-5">{{ newspaper.topic }}</p>
+          <p class="pe-5">{{ newspaper.content|truncatewords:100 }}</p>
+          <a href="{% url 'newspaper:newspaper-detail' pk=newspaper.id %}" class="text-primary icon-move-right">Click here to read further
+            <i class="fas fa-arrow-right text-sm ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% empty %}
+  <p>Currently there are no newspapers</p>
+{% endfor %}
+
 {% endblock %}

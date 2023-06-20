@@ -1,12 +1,16 @@
-{% extends "base.html" %}
+{% extends "base_background.html" %}
 
 {% block content %}
-  <h1>Delete a newspaper?</h1>
-  <form action="" method="post">
-    {% csrf_token %}
 
-    <p>Title: {{ newspaper.title }}</p>
-
-    <input type="submit" value="Yes, delete" class="btn btn-danger">
-  </form>
+<section>
+  <div class="container py-3 my-8">
+    <div class="col-lg-9 mx-auto d-flex justify-content-center flex-column">
+      <h3>Delete the Newspaper: "{{ newspaper.title }}"</h3>
+      <form role="form" id="contact-form" method="post" autocomplete="off">
+        {% csrf_token %}
+        <button type="submit" class="btn bg-gradient-danger w-20 mt-5">Yes, delete</button>
+      </form>
+    </div>
+  </div>
+</section>
 {% endblock %}
