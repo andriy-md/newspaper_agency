@@ -1,10 +1,15 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from newspaper.forms import NewspaperForm, NewspaperSearchForm, RedactorForm
+from newspaper.forms import (
+    NewspaperForm,
+    NewspaperSearchForm,
+    RedactorForm,
+    RedactorUpdateDataForm
+)
 from newspaper.models import Newspaper, Topic
 
 
@@ -79,12 +84,15 @@ class RedactorCreateView(generic.CreateView):
         return reverse("newspaper:redactor-detail", kwargs={"pk": self.object.pk})
 
 
-class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
+class RedactorUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = get_user_model()
-    form_class = RedactorForm
+    form_class = RedactorUpdateDataForm
 
     def get_success_url(self):
         return reverse("newspaper:redactor-detail", kwargs={"pk": self.object.pk})
+
+    def test_func(self):
+        return self.get_object() == self.request.user
 
 
 class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
