@@ -127,7 +127,7 @@ class RedactorListViewTest(test.TestCase):
         self.assertEqual(len(response.context["redactor_list"]), 10)
 
 
-class PrivateRedactorCreateViewTest(test.TestCase):
+class RedactorCreateViewTest(test.TestCase):
     def setUp(self):
         test_user = get_user_model().objects.create(
             username="test_user",
@@ -158,10 +158,3 @@ class PrivateRedactorCreateViewTest(test.TestCase):
         response = self.client.post(RedactorCreatePath, data=redactor_data)
 
         self.assertRedirects(response, reverse("newspaper:redactor-detail", args=[2]))
-
-
-class PublicRedactorCreateViewTest(test.TestCase):
-    def test_url_not_accessible(self):
-        response = self.client.get(RedactorCreatePath)
-
-        self.assertNotEqual(response.status_code, 200)

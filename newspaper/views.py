@@ -20,7 +20,7 @@ def index(request):
 
 class NewspaperListView(generic.ListView):
     model = Newspaper
-    paginate_by = 3
+    paginate_by = 7
 
     def get_queryset(self):
         queryset = Newspaper.objects.all().prefetch_related("publishers")
@@ -71,7 +71,7 @@ class RedactorDetailView(generic.DetailView):
     model = get_user_model()
 
 
-class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+class RedactorCreateView(generic.CreateView):
     model = get_user_model()
     form_class = RedactorForm
 
