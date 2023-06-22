@@ -13,6 +13,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 python manage.py runserver      # Starts Django Server
 ```
+settings.py use load_dotenv from dotenv
+Sample of how to fill .env is provided in .env.sample
 
 ## Features
 * You cant watch list of all newspapers with the ability to search specific Newspaper by its title.
