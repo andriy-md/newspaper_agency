@@ -10,6 +10,7 @@ git clone https://github.com/andriy-md/newspaper_agency.git
 cd newspaper_agency
 python3 -m venv venv
 source venv/bin/activate
+pip install -r requirements.txt
 python manage.py runserver      # Starts Django Server
 ```
 
