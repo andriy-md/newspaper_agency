@@ -4,6 +4,10 @@
 The Newspaper Agency Project ("Project") allows you to track Newspapers with assigned to them Redactor(s) and Topic. 
 So you will always know, who were the Publishers of each Newspaper and of which Topic is Newspaper.
 
+## Check it out
+
+[Newspaper Agency Project deployed to Render](https://newspapers-agency-gsg6.onrender.com)
+
 ## Installing / Getting started
 ```shell
 git clone https://github.com/andriy-md/newspaper_agency.git
